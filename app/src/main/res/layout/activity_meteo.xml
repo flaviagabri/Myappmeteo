@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:ignore="ExtraText"
+android:background="@drawable/gradient"
+android:id="@+id/meteo_layout">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/selected_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/selected_country"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/forecast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="true"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/text2"
+        android:textSize="16sp"
+        android:includeFontPadding="false"/>
+    <TextView
+        android:id="@+id/temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/text2"
+        android:textSize="35sp"
+        android:includeFontPadding="false"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/feels_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/text2"
+        android:textSize="20sp"
+        android:includeFontPadding="false"
+        android:layout_gravity="center_horizontal" />
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/text2"
+        android:textSize="13sp"
+        android:includeFontPadding="false"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="italic"/>
+
+</LinearLayout>
+
+<View
+    android:layout_width="150dp"
+    android:layout_height="1dp"
+    android:background="@color/design_default_color_primary_dark"
+    android:layout_marginTop="15dp"
+    android:layout_gravity="center_horizontal"/>
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.4"
+        android:gravity="start"
+        android:text="Min Temperature"
+        android:textColor="@color/text1"
+        android:textSize="18sp"
+        android:layout_marginStart="5dp"
+        android:layout_gravity="center_vertical"
+        android:textStyle="bold"/>
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_weight="0.2"
+        android:src="@drawable/temp_down2"
+        android:layout_gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/min_temp"
+        android:layout_width="0dp"
+        android:layout_weight="0.4"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="--"
+        android:textColor="@color/text1"
+        android:textSize="19sp" />
+</LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.4"
+        android:gravity="start"
+        android:text="Max Temperature"
+        android:textColor="@color/text1"
+        android:textSize="18sp"
+        android:layout_marginStart="5dp"
+        android:layout_gravity="center_vertical"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_weight="0.2"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/temp_up2" />
+
+    <TextView
+        android:id="@+id/max_temp"
+        android:layout_width="0dp"
+        android:layout_weight="0.4"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="--"
+        android:textColor="@color/text1"
+        android:textSize="19sp" />
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="5dp">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.4"
+        android:gravity="start"
+        android:text="Wind Speed"
+        android:textColor="@color/text1"
+        android:textSize="18sp"
+        android:layout_marginStart="5dp"
+        android:layout_gravity="center_vertical"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_weight="0.2"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/wind" />
+
+    <TextView
+        android:id="@+id/wind_speed"
+        android:layout_width="0dp"
+        android:layout_weight="0.4"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="--"
+        android:textColor="@color/text1"
+        android:textSize="19sp" />
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="5dp">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.4"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="5dp"
+        android:gravity="start"
+        android:text="Humidity"
+        android:textColor="@color/text1"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_weight="0.2"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/humidity" />
+
+    <TextView
+        android:id="@+id/humidity"
+        android:layout_width="0dp"
+        android:layout_weight="0.4"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="--"
+        android:textColor="@color/text1"
+        android:textSize="19sp" />
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="5dp">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.4"
+        android:gravity="start"
+        android:text="Visibility"
+        android:textColor="@color/text1"
+        android:textSize="18sp"
+        android:layout_marginStart="5dp"
+        android:layout_gravity="center_vertical"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_weight="0.2"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/visibility" />
+
+    <TextView
+        android:id="@+id/visibility"
+        android:layout_width="0dp"
+        android:layout_weight="0.4"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="--"
+        android:textColor="@color/text1"
+        android:textSize="19sp" />
+</LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginRight="20dp"
+    android:orientation="horizontal"
+    android:layout_gravity="center_vertical"
+    android:weightSum="2">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/sunrise2"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sunrise"
+            android:includeFontPadding="false"
+            android:textColor="@color/text3"
+            android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/sunrise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="--"
+            android:includeFontPadding="false"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textColor="@color/text1"
+            android:textSize="19sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/sunset2"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sunset"
+            android:includeFontPadding="false"
+            android:textColor="@color/text3"
+            android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/sunset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="--"
+            android:includeFontPadding="false"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textColor="@color/text1"
+            android:textSize="19sp"/>
+    </LinearLayout>
+</LinearLayout>
+</LinearLayout>

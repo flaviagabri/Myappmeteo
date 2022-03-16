@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MyClosetWeather</string>
+    <string name="welcome_message">You can check here your city current weather</string>
+    <string name="city_name">Insert the name of your city</string>
+    <string name="weather_button">Show weather</string>
+    <string name="weather"></string>
+    <string name="enter_your_city_name">Enter your city name</string>
+</resources>

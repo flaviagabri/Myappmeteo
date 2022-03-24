@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent= new Intent(this, com.example.myappmeteo.Meteo.class);
         cityName = cityField.getText().toString();
         //Log.i("Nuvola", "city " + cityName);
-        intent.putExtra("city", cityName); //passing the city name to Meteo activity
+        intent.putExtra("city", cityName);//passing the city name to Meteo activity
+
         startActivity(intent);
     }
 
@@ -35,5 +36,13 @@ public class MainActivity extends AppCompatActivity {
         intent1.putExtra("city", cityName); //passing the city name to closet activity
 
         startActivity(intent1);
+    }
+
+    public void openTransportation(View view) {
+        Intent intent3= new Intent(this, com.example.myappmeteo.transportation.class);
+        cityName = cityField.getText().toString();
+        intent3.putExtra("city", cityName);
+
+        startActivity(intent3);
     }
 }

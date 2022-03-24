@@ -11,6 +11,7 @@ package com.example.myappmeteo;
         import android.os.Bundle;
         import android.util.Log;
         import android.view.View;
+        import android.widget.LinearLayout;
         import android.widget.TextView;
 
         import com.google.android.material.snackbar.Snackbar;
@@ -34,8 +35,6 @@ public class Meteo extends AppCompatActivity {
 
     final static String APIkey= "5354c964cdff845f60041f186ea7c710";
     TextView city_text_view, country_text_view, time, temp, feels_temp, forecast_description, temp_min, temp_max, humidity, wind_sp, visibility, sunrise, sunset;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +62,9 @@ public class Meteo extends AppCompatActivity {
         //Snackbar.make(findViewById(R.id.meteo_layout), "Loading weather", Snackbar.LENGTH_LONG).setAction("Action", null).show();
         findWeather();
 
+
+
+
     }
 
 
@@ -77,6 +79,9 @@ public class Meteo extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
+
     public class WeatherTask extends AsyncTask<String, Void, String> {
         @Override
         protected void onPreExecute(){
@@ -124,9 +129,11 @@ public class Meteo extends AppCompatActivity {
 
                 JSONArray array = jsonObject.getJSONArray("weather");
                 String description="";
+                String main_description = "";
                 // array has only one element, even though we use a loop to get data
                 for(int i=0; i<array.length(); i++){
                     JSONObject temp = array.getJSONObject(i);
+                    main_description = temp.getString("main");
                     description = temp.getString("description");
                 }
                 forecast_description.setText(description);
@@ -166,6 +173,34 @@ public class Meteo extends AppCompatActivity {
                 sunset.setText(suns);
                 country_text_view.setText(country);
                 city_text_view.setText(city_name);
+                /*if(dt < set) {
+                    switch (main_description) {
+                        case "Clear":
+                            layout.setBackgroundResource(R.drawable.clear);
+                            break;
+                        case "Thunderstorm":
+                            layout.setBackgroundResource(R.drawable.grey);
+                            break;
+                        case "Drizzle":
+                            layout.setBackgroundResource(R.drawable.grey);
+                            break;
+                        case "Snow":
+                            layout.setBackgroundResource(R.drawable.azur);
+                            break;
+                        case "Rain":
+                            layout.setBackgroundResource(R.drawable.azur);
+                            break;
+                        case "Clouds":
+                            layout.setBackgroundResource(R.drawable.azur);
+                            break;
+                        default:
+                            layout.setBackgroundResource(R.drawable.gradient);
+                            break;
+                    }
+                }
+                else if(dt >= set){
+                    layout.setBackgroundResource(R.drawable.dark);
+                }*/
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -173,7 +208,6 @@ public class Meteo extends AppCompatActivity {
         }
 
     }
-
 
 
 }

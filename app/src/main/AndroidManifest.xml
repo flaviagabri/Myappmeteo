@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyClosetWeather">
         <activity
+            android:name=".transportation"
+            android:exported="false" />
+        <activity
+            android:name=".accessory"
+            android:exported="false" />
+        <activity
             android:name=".closet"
             android:exported="false" />
         <activity

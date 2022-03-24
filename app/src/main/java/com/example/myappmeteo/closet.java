@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,12 +28,10 @@ import java.util.Locale;
 
 public class closet extends AppCompatActivity {
     public String city;
-    int temperature;
+    double temperature;
+    String main_description;
     ImageView imageView,imageView1,imageView2;
     TextView textView2;
-
-
-
     final static String APIkey= "5354c964cdff845f60041f186ea7c710";
 
     @Override
@@ -43,102 +43,11 @@ public class closet extends AppCompatActivity {
         city = intent1.getStringExtra("city");
 
         findClothes();
-        //ImageView imageView,imageView1,imageView2;
-
-        //int_temp= Integer.parseInt(temperature);
 
         imageView=(ImageView) findViewById(R.id.imageView);
         imageView1=(ImageView) findViewById(R.id.imageView2);
         imageView2=(ImageView) findViewById(R.id.imageView3);
         textView2=(TextView) findViewById(R.id.textView2);
-
-         //prova con if
-
-        /*if(temperature>25 && temperature<45) {// molto caldo
-            imageView.setImageResource(R.drawable.pantaloncini);
-            imageView1.setImageResource(R.drawable.tshirt);
-            imageView2.setImageResource(R.drawable.sandali);
-        }
-
-        else if(temperature<5) { //molto freddo
-
-            imageView.setImageResource(R.drawable.pantaloni);
-            imageView1.setImageResource(R.drawable.maglione);
-            imageView2.setImageResource(R.drawable.anfibi);
-
-        }
-         else if( temperature>5 &&temperature<15){ //abbastanza freddo
-            imageView.setImageResource(R.drawable.pantaloni);
-            imageView1.setImageResource(R.drawable.maglione);
-            imageView2.setImageResource(R.drawable.anfibi);
-
-
-        }
-         else if( temperature>15 && temperature<25 )// { // temperatura mite
-            imageView.setImageResource(R.drawable.pantaleggeri);
-            imageView1.setImageResource(R.drawable.camicia);
-            imageView2.setImageResource(R.drawable.converse);
-
-
-        }*/
-
-        //prova con switch-case
-
-        /*switch((-10 <= temperature && temperature<=5)? 0 :
-                (5<temperature && temperature<=15)? 1 :
-                        (15<temperature && temperature<=25)? 2:
-                                (25<temperature && temperature<=45)? 3:4) {
-
-            case 0:
-                imageView.setImageResource(R.drawable.pantaloni);
-                imageView1.setImageResource(R.drawable.maglione);
-                imageView2.setImageResource(R.drawable.anfibi);
-                break;
-            case 1:
-                imageView.setImageResource(R.drawable.pantaloni);
-                imageView1.setImageResource(R.drawable.maglione);
-                imageView2.setImageResource(R.drawable.anfibi);
-                break;
-            case 2:
-                imageView.setImageResource(R.drawable.pantaleggeri);
-                imageView1.setImageResource(R.drawable.camicia);
-                imageView2.setImageResource(R.drawable.converse);
-                break;
-            case 3:
-                imageView.setImageResource(R.drawable.pantaloncini);
-                imageView1.setImageResource(R.drawable.tshirt);
-                imageView2.setImageResource(R.drawable.sandali);
-                break;
-
-        }*/
-        switch(temperature){
-
-            case -10: case -9: case -8: case -7: case -6: case -5: case -4: case -3: case -2: case -1: case 0: case 1: case 2: case 3: case 4: case 5:
-                imageView.setImageResource(R.drawable.pantaloni);
-                imageView1.setImageResource(R.drawable.maglione);
-                imageView2.setImageResource(R.drawable.anfibi);
-                break;
-            case 6: case 7: case 8: case 9: case 10: case 11: case 12: case 13: case 14: case 15:
-                imageView.setImageResource(R.drawable.pantaloni);
-                imageView1.setImageResource(R.drawable.maglione);
-                imageView2.setImageResource(R.drawable.anfibi);
-                break;
-            case 16: case 17: case 18: case 19: case 20: case 21: case 22: case 23: case 24: case 25:
-                imageView.setImageResource(R.drawable.pantaleggeri);
-                imageView1.setImageResource(R.drawable.camicia);
-                imageView2.setImageResource(R.drawable.converse);
-                break;
-            case 26:  case 27: case 28: case 29: case 30: case 31: case 32: case 33:  case 34: case 35: case 36: case 37: case 38: case 39: case 40:
-                imageView.setImageResource(R.drawable.pantaloncini);
-                imageView1.setImageResource(R.drawable.tshirt);
-                imageView2.setImageResource(R.drawable.sandali);
-                break;
-
-
-        }
-
-
-
 
     }
 
@@ -159,8 +68,7 @@ public class closet extends AppCompatActivity {
 
 
 public class WeatherTask1 extends AsyncTask<String, Void, String> {
-        //private BreakIterator forecast_description;  //lo ha creato lui ???
-        //private int int_temp;   //creato lui
+
 
         @Override
         protected void onPreExecute(){
@@ -208,24 +116,54 @@ public class WeatherTask1 extends AsyncTask<String, Void, String> {
 
                 JSONArray array = jsonObject.getJSONArray("weather");
                 String description="";
+                String main_description = "";
                 // array has only one element, even though we use a loop to get data
                 for(int i=0; i<array.length(); i++){
                     JSONObject temp = array.getJSONObject(i);
                     description = temp.getString("description");
+                    main_description = temp.getString("main");
                 }
                 //forecast_description.setText(description);
 
                 JSONObject main = jsonObject.getJSONObject("main");
                 temperature=main.getInt("temp");
-                String temp=String.valueOf(temperature);
-                textView2.setText(temp);
+                if (temperature <= 8) { //molto freddo
+                    imageView.setImageResource(R.drawable.pantaloni);
+                    imageView1.setImageResource(R.drawable.maglione);
+                    imageView2.setImageResource(R.drawable.anfibi);
+                    Toast.makeText(getApplicationContext(), "Ti suggeriamo di mettere calze pesanti sotto" +
+                            "i pantaloni per avere più caldo", Toast.LENGTH_LONG).show();
 
+                } else if (temperature > 8 && temperature < 15) { //abbastanza freddo
+                    imageView.setImageResource(R.drawable.pantaloni);
+                    imageView1.setImageResource(R.drawable.felpa);
+                    imageView2.setImageResource(R.drawable.sneakers);
+                } else if (temperature >= 15 && temperature < 25) { // temperatura mite
+                    imageView.setImageResource(R.drawable.pantaleggeri);
+                    imageView1.setImageResource(R.drawable.camicia);
+                    imageView2.setImageResource(R.drawable.converse);
+                } else if (temperature >= 25 && temperature < 50) {// molto caldo
+                    imageView.setImageResource(R.drawable.pantaloncini);
+                    imageView1.setImageResource(R.drawable.tshirt);
+                    imageView2.setImageResource(R.drawable.sandali);
+                }
 
-            } catch (JSONException e) {
+            }
+            catch (JSONException e) {
                 e.printStackTrace();
             }
         }
 
+
+    }
+
+
+    public void openAccessorize(View view){
+        Log.i("temp", "Temp is"+temperature);
+        Intent intent2= new Intent(this, accessory.class);
+        intent2.putExtra("temperature", temperature);
+        intent2.putExtra("description",main_description);
+        startActivity(intent2);
     }
 
 

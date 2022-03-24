@@ -30,7 +30,7 @@ public class closet extends AppCompatActivity {
     public String city;
     double temperature;
     String main_description;
-    ImageView imageView,imageView1,imageView2;
+    ImageView imageView,imageView1,imageView2,imageView3;
     TextView textView2;
     final static String APIkey= "5354c964cdff845f60041f186ea7c710";
 
@@ -48,6 +48,7 @@ public class closet extends AppCompatActivity {
         imageView1=(ImageView) findViewById(R.id.imageView2);
         imageView2=(ImageView) findViewById(R.id.imageView3);
         textView2=(TextView) findViewById(R.id.textView2);
+        imageView3=(ImageView) findViewById(R.id.imageView5);
 
     }
 
@@ -127,26 +128,62 @@ public class WeatherTask1 extends AsyncTask<String, Void, String> {
 
                 JSONObject main = jsonObject.getJSONObject("main");
                 temperature=main.getInt("temp");
-                if (temperature <= 8) { //molto freddo
+                if (temperature <= 5) { //molto freddo
                     imageView.setImageResource(R.drawable.pantaloni);
                     imageView1.setImageResource(R.drawable.maglione);
                     imageView2.setImageResource(R.drawable.anfibi);
+                    imageView3.setImageResource(R.drawable.woolrich);
                     Toast.makeText(getApplicationContext(), "Ti suggeriamo di mettere calze pesanti sotto" +
                             "i pantaloni per avere più caldo", Toast.LENGTH_LONG).show();
 
-                } else if (temperature > 8 && temperature < 15) { //abbastanza freddo
+                }
+                else if (temperature >5  && temperature < 10) { //abbastanza freddo
                     imageView.setImageResource(R.drawable.pantaloni);
                     imageView1.setImageResource(R.drawable.felpa);
+                    imageView2.setImageResource(R.drawable.anfibi);
+                    imageView3.setImageResource(R.drawable.woolrich);
+
+                }
+                else if (temperature >= 10 && temperature < 15) { // temperatura mite
+                    imageView.setImageResource(R.drawable.jeans);
+                    imageView1.setImageResource(R.drawable.felpa);
                     imageView2.setImageResource(R.drawable.sneakers);
-                } else if (temperature >= 15 && temperature < 25) { // temperatura mite
+                    imageView3.setImageResource(R.drawable.cappottino);
+
+                }
+                else if (temperature >= 15 && temperature < 20) {// molto caldo
                     imageView.setImageResource(R.drawable.pantaleggeri);
                     imageView1.setImageResource(R.drawable.camicia);
                     imageView2.setImageResource(R.drawable.converse);
-                } else if (temperature >= 25 && temperature < 50) {// molto caldo
+                    imageView3.setImageResource(R.drawable.pelle);
+                }
+
+                else if (temperature >= 20 && temperature < 25) {
+
+                    imageView.setImageResource(R.drawable.pantaleggeri);
+                    imageView1.setImageResource(R.drawable.tshirt);
+                    imageView2.setImageResource(R.drawable.converse);
+                    imageView3.setImageResource(R.drawable.jeans2);
+
+                }
+                else if (temperature >= 25 ) {
+
+
                     imageView.setImageResource(R.drawable.pantaloncini);
                     imageView1.setImageResource(R.drawable.tshirt);
                     imageView2.setImageResource(R.drawable.sandali);
+                    imageView3.setImageResource(R.drawable.bianco);
+
+
                 }
+
+
+
+
+
+
+
+
 
             }
             catch (JSONException e) {

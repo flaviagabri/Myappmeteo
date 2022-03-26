@@ -28,10 +28,9 @@ import java.util.Locale;
 public class transportation extends AppCompatActivity {
 
     public String city;
-    double temperature;
-    String description;
-    ImageView transport;
-    TextView forecast_description;
+
+    ImageView transport, transport2;
+    TextView forecast_description, message, message2;
     final static String APIkey= "5354c964cdff845f60041f186ea7c710";
 
 
@@ -44,12 +43,15 @@ public class transportation extends AppCompatActivity {
         Intent intent3 = getIntent();
         city = intent3.getStringExtra("city");
 
-        findTransportation();
 
         forecast_description = (TextView) findViewById(R.id.forecast);
+        transport = (ImageView) findViewById(R.id.transport);
+        message = (TextView) findViewById(R.id.message);
+        transport2 = (ImageView) findViewById(R.id.transport2);
+        message2 = (TextView) findViewById(R.id.message2);
 
 
-
+        findTransportation();
     }
 
 
@@ -111,82 +113,82 @@ public class transportation extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(s);
 
                 JSONArray array = jsonObject.getJSONArray("weather");
-                String description="";
+                String main_description="";
 
 
 
                 // array has only one element, even though we use a loop to get data
                 for(int i=0; i<array.length(); i++){
                     JSONObject temp = array.getJSONObject(i);
-                    description = temp.getString("main");
+                    main_description = temp.getString("main");
 
                 }
-                forecast_description.setText(description);
-                /*if(description.equals("Thunderstorm")){
+                JSONObject main = jsonObject.getJSONObject("main");
+                String temperature = main.getString("temp");
 
-                    transport.setImageResource(R.drawable.bus);
+                forecast_description.setText("Current weather: "+main_description.toLowerCase());
 
-                }
-                if(description.equals("Drizzle")){
-
-                    transport.setImageResource(R.drawable.car);
-
-                }
-                if(description.equals("Rain")){
-
-                    transport.setImageResource(R.drawable.car);
-
-                }
-                if(description.equals("Snow")){
-
-                    transport.setImageResource(R.drawable.apiedi);
-
-                }
-                if(description.equals("Clear")){
-
-                    transport.setImageResource(R.drawable.apiedi);
-
-                }
-                if(description.equals("Clouds")){
-
-                    transport.setImageResource(R.drawable.scooter);
-
-                }*/
-
-                switch(description){
-
+                switch(main_description){
                     case "Thunderstorm":
                         transport.setImageResource(R.drawable.bus);
+                        message.setText("you can take the bus to stay safe!");
                         break;
                     case "Drizzle":
+                    case "Rain": {
                         transport.setImageResource(R.drawable.car);
-                        break;
-                    case "Rain":
-                        transport.setImageResource(R.drawable.car);
-                        break;
+                        message.setText("use the car rather than the scooter");
+                        transport2.setImageResource(R.drawable.bus);
+                        message2.setText("or you can take the bus!");
+                    }
+                    break;
                     case "Snow":
                         transport.setImageResource(R.drawable.apiedi);
+                        message.setText("you may take a walk, but be careful!");
                         break;
                     case "Clear":
+                    {
                         transport.setImageResource(R.drawable.apiedi);
-                        break;
+                        message.setText("you may take a walk");
+                        transport2.setImageResource(R.drawable.bicicletta);
+                        message2.setText("or you can ride your bike!");
+                    }
+                    break;
                     case "Clouds":
+                    {
                         transport.setImageResource(R.drawable.scooter);
-                        break;
+                        message.setText("you may take your scooter");
+                        transport2.setImageResource(R.drawable.car);
+                        message2.setText("or you can take the car!");
+                    }
+                    break;
+
+                    case "Mist":
+                    case "Smoke":
+                    case "Haze":
+                    case "Fog":
+                    {
+                        transport.setImageResource(R.drawable.apiedi);
+                        message.setText("you may take a walk");
+                        transport2.setImageResource(R.drawable.car);
+                        message2.setText("or you can take the car equipped with fog lights.Pay attention!");
+                    }
+                    break;
+                    case "Tornado":
+                    case "Squall":
+                    {
+                        message.setText("don't go anywhere unless it is important.Stay safe!");
+                        message2.setText("Stay home!");
+
+                    }
+                    break;
+
+
                     default:
-                        transport.setImageResource(R.drawable.bus);
-
+                    {
+                        transport.setImageResource(R.drawable.sorry);
+                        message.setText("Sorry, we couldn't find any transportation advice");
+                    }
                 }
-
-
-
-
-
-
-
-
-
-
 
 
 
